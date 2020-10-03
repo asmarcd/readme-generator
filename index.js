@@ -10,6 +10,16 @@ inquirer.prompt([
         message: "What is the name of your project?",
     },
     {
+        name: "github",
+        type: "input",
+        message: "Provide a link to your GitHub profile:",
+    },
+    {
+        name: "email",
+        type: "input",
+        message: "What is your email address?",
+    },
+    {
         name: "collaborators",
         type: "list",
         message: "Did you collaborate with anyone on this project?",
@@ -58,17 +68,9 @@ inquirer.prompt([
         message: "Do you want to include a license? See choosealicense.com for more info and options.",
         choices: [
             "Add the MIT License",
+            "Add the GPL License",
             "I need a license for a specific community.",
             "I don't want to include a license right now."
-        ]
-    },
-    {
-        name: "badgesYesNo",
-        type: "list",
-        message: "Do you want to include a section for badges?",
-        choices: [
-            "Yes",
-            "No"
         ]
     },
     {

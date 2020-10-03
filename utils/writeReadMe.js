@@ -90,30 +90,36 @@ For answers to common questions about this code of conduct, see the FAQ at https
 
 // function to generate markdown for README
 function writeReadMe(userAnswers) {
-  // These variables are sections that only get included if the user chooses to include them in the template.
-  let includeLicense = ""
-  let includeBadges = ""
-  let includeContCoc = ""
-  let includeTests = ""
 
-  // These if statements are used for including items on the table of contents if the user has chosen to include them.
+  // These variables are sections that only get included if the user chooses to include them in the template.
+  let includeLicense = "";
+  let includeContCoc = "";
+  let includeTests = "";
+  let licenseHeader = "";
+  let contCocHeader = "";
+  let testsHeader = "";
+  let badge = "";
+
+  const badgeMit = `![license](https://img.shields.io/apm/l/:packageName)`
+  const badgeGnu = ` ![license](https://img.shields.io//eclipse-marketplace/l/:name)`
+
+  // These if statements are used for including items on the table of contents and in the body of the readme if the user has chosen to include them.
   if (userAnswers.licenseType === "I don't want to include a license right now.") {
     includeLicense = "";
   } else if (userAnswers.licenseType === "Add the MIT License") {
     includeLicense = "* [License](#License)";
     licenseHeader = `## License
   ${licenseMit}`
+    badge = badgeMit;
   } else if (userAnswers.licenseType === "I need a license for a specific community.") {
     includeLicense = "* [License](#License)";
     licenseHeader = `## License
   Find the best license at https://choosealicense.com/`
-  };
-  if (userAnswers.badgesYesNo === "Yes") {
-    includeBadges = "* [Badges](#badges)";
-    badgesHeader = `## Badges
-    Add your badges using the instructions here: https://shields.io/`
-  } else {
-    includeBadges = "";
+  } else if (userAnswers.licenseType === "Add the GPL License") {
+    includeLicense = "* [License](#License)";
+    licenseHeader = `## License
+  Copy the license at https://choosealicense.com/licenses/gpl-3.0/`
+    badge = badgeGnu;
   };
   if (userAnswers.contributorCocYesNo === "Yes") {
     includeContCoc = "* [Contributor Covenant Code of Conduct](#contributor)";
@@ -129,6 +135,7 @@ function writeReadMe(userAnswers) {
     includeTests = "";
   };
 
+  // These variables create the layout of the collaborators and table of contents sections so they can be inserted if the user chooses to include them.
   let collaborators = `## Collaborators
 
 | Collaborators | GitHub Profile |
@@ -136,6 +143,8 @@ function writeReadMe(userAnswers) {
 |   |   |
 |   |   |
 |   |   |
+
+Fill in your collaborators names and GitHub Profiles above
 `
   let tableOfContents = `## Table of Contents
 * [Description](#description)
@@ -143,14 +152,15 @@ function writeReadMe(userAnswers) {
 * [Usage](#usage)
 * [Screenshot](#screenshot)
 ${includeLicense}
-${includeBadges}
 ${includeContCoc}
 ${includeTests}
 `
 
+  // This 
   return `# ${userAnswers.name}
   <a href = "${userAnswers.siteLink}">See it in action here</a>
-  
+  ${badge}
+
   ${collaborators}
   
   ${tableOfContents}
@@ -178,11 +188,13 @@ ${includeTests}
   
   ${licenseHeader}
   
-  ${badgesHeader}
-  
-  ${ContCocHeader}
+  ${contCocHeader}
   
   ${testsHeader}
+
+  ## Questions
+  Find me on GitHub at ${userAnswers.github}
+  Reach me by email at ${userAnswers.email}
 `;
 }
 
