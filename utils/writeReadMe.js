@@ -100,8 +100,8 @@ function writeReadMe(userAnswers) {
   let testsHeader = "";
   let badge = "";
 
-  const badgeMit = `![license](https://img.shields.io/apm/l/:packageName)`
-  const badgeGnu = ` ![license](https://img.shields.io//eclipse-marketplace/l/:name)`
+  const badgeMit = `![license](https://img.shields.io/apm/l/:MIT)`
+  const badgeGnu = ` ![license](https://img.shields.io//eclipse-marketplace/l/:GPL)`
 
   // These if statements are used for including items on the table of contents and in the body of the readme if the user has chosen to include them.
   if (userAnswers.licenseType === "I don't want to include a license right now.") {
@@ -159,6 +159,7 @@ ${includeTests}
   // This 
   return `# ${userAnswers.name}
   <a href = "${userAnswers.siteLink}">See it in action here</a>
+
   ${badge}
 
   ${collaborators}
@@ -194,6 +195,7 @@ ${includeTests}
 
   ## Questions
   Find me on GitHub at ${userAnswers.github}
+  
   Reach me by email at ${userAnswers.email}
 `;
 }
